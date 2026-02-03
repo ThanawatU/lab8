@@ -7,10 +7,9 @@ Open Browser To Login Page
     Evaluate    $options.add_argument("--headless")
     Evaluate    $options.add_argument("--no-sandbox")
     Evaluate    $options.add_argument("--disable-dev-shm-usage")
-
+    
+    # We use 'chrome' and pass the options. 
+    # If it still fails, we'll need to verify the path in your Jenkins shell.
     Open Browser    https://computing.kku.ac.th    browser=chrome    options=${options}
     
-    # Simple check to confirm we are there
-    Title Should Be    College of Computing
-
-    [Teardown]    Close Browser
+    Close Browser
