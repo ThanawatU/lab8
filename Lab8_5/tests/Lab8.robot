@@ -3,22 +3,19 @@ Library    SeleniumLibrary
 
 *** Test Cases ***
 Open Browser To Login Page
-    ${chrome args}=    Create List
-    ...    --headless
-    ...    --no-sandbox
-    ...    --disable-dev-shm-usage
-    ...    --disable-gpu
-    ...    --remote-debugging-port=9222
-
-    ${caps}=    Create Dictionary
-    ...    browserName=chrome
-    ...    goog:chromeOptions={'args': ${chrome args}}
-
+    ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Call Method    ${chrome_options}    add_argument    --headless
+    Call Method    ${chrome_options}    add_argument    --no-sandbox
+    Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
+    Call Method    ${chrome_options}    add_argument    --disable-gpu
+    Call Method    ${chrome_options}    add_argument    --remote-debugging-port=9222
+    
+    # Optional: If you must specify the executable path, use the 'service' argument pattern 
+    # or ensure chromedriver is in your system PATH (recommended for Jenkins/Docker).
+    
     Open Browser
-    ...    https://computing.kku.ac.th
-    ...    chrome
-    ...    executable_path=/usr/bin/chromedriver
-    ...    desired_capabilities=${caps}
+    ...    url=https://computing.kku.ac.th
+    ...    browser=chrome
+    ...    options=${chrome_options}
 
-    Close Browser
-
+    [Teardown]    Close Browser
