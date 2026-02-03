@@ -25,13 +25,8 @@ RUN apt-get update && apt-get install -y \
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-RUN python3 -m venv /opt/venv
-
-ENV PATH="/opt/venv/bin:$PATH"
-
 ENV CHROME_BIN=/usr/bin/chromium
 ENV WEBDRIVER_CHROME_DRIVER=/usr/bin/chromedriver
-
 
 RUN pip install --upgrade pip
 RUN pip install robotframework robotframework-seleniumlibrary selenium
