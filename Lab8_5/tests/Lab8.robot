@@ -3,10 +3,10 @@ Library    SeleniumLibrary
 
 *** Test Cases ***
 Open Browser To Login Page
-    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
-    Call Method    ${options}    add_argument    --headless
-    Call Method    ${options}    add_argument    --no-sandbox
-    Call Method    ${options}    add_argument    --disable-dev-shm-usage
-    
-    Open Browser    https://computing.kku.ac.th    chrome    options=${options}
+    Open Browser
+    ...    https://computing.kku.ac.th
+    ...    chrome
+    ...    executable_path=/usr/bin/chromedriver
+    ...    options=add_argument(--headless);add_argument(--no-sandbox);add_argument(--disable-dev-shm-usage)
     Close Browser
+
